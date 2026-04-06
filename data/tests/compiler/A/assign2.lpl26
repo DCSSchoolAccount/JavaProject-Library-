@@ -1,0 +1,13 @@
+//73
+//19
+//
+
+begin
+   int myvar = 73;
+   int highLow = myvar;
+
+   myvar = 78;
+   println(highLow);
+   myvar = 19;
+   println(myvar);
+end

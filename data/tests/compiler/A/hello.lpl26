@@ -1,0 +1,12 @@
+//Hello
+//
+begin
+    int H = 72;
+    int o = 111;
+    printch(H);
+    printch(H + 29);
+    printch(36 + H);
+    printch(o - 3);
+    printch(o);
+    println();
+end

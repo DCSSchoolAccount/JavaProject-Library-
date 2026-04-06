@@ -1,0 +1,112 @@
+tokens {
+    -- simple comments and whitespace
+    SKIP: "((//.*((\r?\n)|\z))|\s)+"
+    LBR: "\("
+    RBR: "\)"
+    LCBR: "\{"
+    RCBR: "\}"
+    LSQBR: "\["
+    RSQBR: "\]"
+    SEMIC: ";"
+    COMMA: ","
+    DOT: "\."
+    BEGIN: "begin"
+    END: "end"
+    FUN: "fun"
+    PROC: "proc"
+    PRINT: "print"
+    PRINTLN: "println"
+    PRINTCH: "printch"
+    WHILE: "while"
+    IF: "if"
+    ELSE: "else"
+    RETURN: "return"
+    RECDEF: "recdef"
+    REC: "rec"
+    INT_TYPE: "int"
+    NEW: "new"
+    FREE: "free"
+    NULL: "null"
+    ASSIGN: "="
+    -- the binary operators:
+    --  == / + - * <= < >= > && ||
+    BINARY_OP: "==|/|\+|-|\*|<=|<|>=|>|&&|\|\|"
+    NOT: "!"
+    LENGTH: "length"
+    QM: "\?"
+    COLON: ":"
+    METHOD_ID: "@[a-zA-Z_0-9$]+"
+    ID: "(_[a-zA-Z_0-9$]+)|([a-zA-Z][a-zA-Z_0-9$]*)"
+    INTLIT: "[0-9]+"
+}
+
+-- grammar rules
+
+Program -> RecordDef* BEGIN VarDecl* Stm* END MethodDef*
+
+Stm -> PRINT LBR Exp RBR SEMIC
+Stm -> PRINTLN LBR OptionalExp RBR SEMIC
+Stm -> PRINTCH LBR Exp RBR SEMIC
+Stm -> WHILE LBR Exp RBR Stm
+Stm -> IF LBR Exp RBR Stm ELSE Stm
+Stm -> LCBR Stm* RCBR
+Stm -> METHOD_ID LBR OptionalParamList RBR SEMIC
+Stm -> FREE LBR Exp RBR SEMIC
+Stm -> LExpr ASSIGN Exp SEMIC
+
+VarDecl -> Type ID OptionalInitialiser SEMIC
+
+OptionalExp -> Exp
+OptionalExp ->
+
+ParamList -> Exp AnotherParam*
+
+AnotherParam -> COMMA Exp
+
+OptionalParamList -> ParamList
+OptionalParamList ->
+
+OptionalInitialiser -> ASSIGN Exp
+OptionalInitialiser ->
+
+Exp -> SimpleExp OperatorClause
+
+LExpr -> ID Accessor*
+
+Accessor -> LSQBR Exp RSQBR
+Accessor -> DOT ID
+
+SimpleExp -> LExpr
+SimpleExp -> INTLIT
+SimpleExp -> NULL
+SimpleExp -> NOT SimpleExp
+SimpleExp -> METHOD_ID LBR OptionalParamList RBR
+SimpleExp -> NEW ObjectInit
+SimpleExp -> LENGTH LBR Exp RBR
+SimpleExp -> LBR Exp RBR
+
+ObjectInit -> ID LBR ParamList RBR
+ObjectInit -> LBR Type RBR LSQBR Exp RSQBR
+
+OperatorClause -> BINARY_OP SimpleExp
+OperatorClause -> QM Exp COLON Exp
+OperatorClause ->
+
+MethodDef -> FUN Type METHOD_ID LBR Formals RBR LCBR VarDecl* Stm* RETURN Exp SEMIC RCBR
+MethodDef -> PROC METHOD_ID LBR Formals RBR LCBR VarDecl* Stm* RCBR
+
+Formals -> Type ID AnotherFormal*
+Formals ->
+
+AnotherFormal -> COMMA Type ID
+
+Type -> INT_TYPE ArrayBrackets*
+Type -> REC LBR ID RBR ArrayBrackets*
+
+ArrayBrackets -> LSQBR RSQBR
+
+RecordDef -> RECDEF ID LBR FieldDecls RBR SEMIC
+
+FieldDecls -> Type ID AnotherField*
+
+AnotherField -> COMMA Type ID

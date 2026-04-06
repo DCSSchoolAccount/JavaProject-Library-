@@ -1,0 +1,8 @@
+//32
+//72
+//
+
+begin
+    println(5 + (3 * 9));
+    println((5 + 3) * 9);
+end

@@ -1,0 +1,11 @@
+/data/tests/compiler/*/*.ssma
+/data/tests/parser/**
+**/*.out
+
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Mac OS ###
+.DS_Store

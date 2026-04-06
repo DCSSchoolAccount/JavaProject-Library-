@@ -1,0 +1,14 @@
+//438
+//
+
+begin
+    @foo(437);
+end
+
+proc @foo(int wilfred) {
+    println(@bar(wilfred + 1));
+}
+
+fun int @bar(int wilfred) {
+    return wilfred;
+}

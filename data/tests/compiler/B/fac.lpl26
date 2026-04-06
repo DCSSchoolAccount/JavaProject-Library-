@@ -1,0 +1,18 @@
+//120
+//5
+//
+
+begin
+    int f = 5;
+    println(@fac(f));
+    println(f);
+end
+
+fun int @fac(int n) {
+    int f;
+    if (n > 1)
+        f = n * @fac(n-1);
+    else
+        f = 1;
+    return f;
+}

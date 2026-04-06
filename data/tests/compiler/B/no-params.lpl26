@@ -1,0 +1,14 @@
+//123
+//
+
+begin
+    @foo();
+end
+
+proc @foo() {
+    println(@bar());
+}
+
+fun int @bar() {
+    return 123;
+}

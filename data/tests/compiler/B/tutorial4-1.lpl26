@@ -1,0 +1,15 @@
+//-3
+//
+
+begin
+    int temp;
+
+    temp = @foo(1,2,3);
+    println(temp);
+end
+
+fun int @foo(int x, int y, int z) {
+    int sum = x + y;
+    int product = y * z;
+    return sum - product;
+}

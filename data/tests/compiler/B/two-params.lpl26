@@ -1,0 +1,14 @@
+//90
+//
+
+begin
+    @foo(9, 11);
+end
+
+proc @foo(int wilfred, int doughBall) {
+    println(@bar(wilfred * doughBall, wilfred));
+}
+
+fun int @bar(int wilfred, int oddSocks) {
+    return wilfred - oddSocks;
+}

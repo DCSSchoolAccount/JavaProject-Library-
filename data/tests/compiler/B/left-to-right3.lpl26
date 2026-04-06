@@ -1,0 +1,61 @@
+//1
+//2
+//2
+//3
+//0
+//4
+//-4
+//5
+//1
+//6
+//7
+//8
+//1
+//1
+//9
+//10
+//0
+//1
+//2
+//
+begin
+    println (
+                @show(
+                    @show(
+                        @show(
+                            @show(
+                                @show(1)
+                                *
+                                @show(2)
+                            )
+                            /
+                            @show(3)
+                        )
+                        -
+                        @show(4)
+                    )
+                    <
+                    @show(5)
+                )
+                +
+                @show(
+                    @show(
+                        @show(6)
+                        >
+                        @show(
+                            @show(7)
+                            <=
+                            @show(8)
+                        )
+                    )
+                    >=
+                    @show(
+                        @show(9)
+                        ==
+                        @show(10)
+                    )
+                )
+            );
+end
+
+fun int @show(int x) { println(x); return x; }
