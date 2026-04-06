@@ -1,0 +1,5 @@
+begin
+	int[] a = new (int)[3];
+	a[3] = 7;
+end
+//2

@@ -1,0 +1,61 @@
+//3
+//5
+//6
+//7
+//
+recdef List(int head, rec(List) tail);
+
+begin
+    rec(List) l = null;
+    {
+        rec(List) x;
+        x = new List(7, l);
+        x = new List(5, x);
+        x = new List(3, x);
+        x = @insert(6, x);
+        l = x;
+    }
+    @printList(l);
+end
+
+proc @printList(rec(List) l) {
+    while (!(l == null)) {
+        println(l.head);
+        rec(List) old = l;
+        l = l.tail;
+        free(old);
+    }
+}
+
+fun rec(List) @insert(int x, rec(List) l) {
+    rec(List) newList = new List(x, l);
+    if (!@isEmpty(l))
+        if (l.head < x) {
+            newList.head = l.head;
+            l.head = x;
+            @ripple(l);
+        } else {}
+    else {}
+    return newList;
+}
+
+fun int @isEmpty(rec(List) l) {
+    return l == null;
+}
+
+proc @ripple(rec(List) l) {
+    if (!@isEmpty(l) && (!@isEmpty(l.tail) && (l.tail.head < l.head))) {
+        int temp = l.head;
+        l.head = l.tail.head;
+        l.tail.head = temp;
+        @ripple(l.tail);
+    } else {}
+}
+
+proc @free(rec(List) l) {
+    while (!(l == null)) {
+        rec(List) tail = l.tail;
+        free(l);
+        l = tail;
+    }
+}

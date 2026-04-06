@@ -1,0 +1,32 @@
+//33
+//100
+//220
+//0
+//
+
+// a Part-record has a part number and a unit cost
+recdef Part(int number, int unitCost);
+
+begin
+    rec(Part) bolt = new Part(1, 20);
+    rec(Part) nut = new Part(2, 3);
+    rec(Part) washer = new Part(3, 1);
+    rec(Part)[] db = new (rec(Part))[3];
+    db[0] = bolt;
+    db[1] = nut;
+    db[2] = washer;
+
+    db[2].unitCost = 2;
+    println(@cost(db[1], 11));
+    println(@cost(db[2], 50));
+    println(@cost(db[0], 11));
+    println(@cost(null, 1000));
+end
+
+// **
+// calculate the total cost of a given quantity of parts
+// (return 0 if the specified part is null)
+// **
+fun int @cost(rec(Part) part, int quantity) {
+    return (part == null) ? 0 : part.unitCost * quantity;
+}

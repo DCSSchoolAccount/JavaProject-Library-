@@ -1,0 +1,8 @@
+begin
+    int[] a;
+	while (1) {
+		a = new (int)[10000];
+	}
+end
+
+//3

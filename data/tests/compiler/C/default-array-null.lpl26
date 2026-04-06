@@ -1,0 +1,11 @@
+//99
+//
+
+begin
+ int[] a;
+
+ println(99);
+ println(length(a));
+end
+
+//1

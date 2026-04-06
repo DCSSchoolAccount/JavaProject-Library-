@@ -1,0 +1,27 @@
+//99
+//-2
+//-1
+//0
+//99
+//
+
+begin
+   int x;
+
+   x = 0;
+   int y = 99;
+
+   while (!(x == 0)) {
+      y = 77;
+   }
+   x = 99;
+   println(y);
+   {
+      int x = 0 - 3;
+       while (x) {
+          x = x + 1;
+          println(x);
+       }
+   }
+   println(x);
+end

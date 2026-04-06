@@ -1,0 +1,51 @@
+//33
+//50
+//220
+//0
+//
+
+// a Database is a linked list of Part-records
+recdef Database(rec(Part) part, rec(Database) rest);
+
+// a Part-record has a part number and a unit cost
+recdef Part(int number, int unitCost);
+
+begin
+    rec(Part) bolt = new Part(1, 20);
+    rec(Part) nut = new Part(2, 3);
+    rec(Part) washer = new Part(3, 1);
+    rec(Database) db;
+
+    db = new Database(bolt, new Database(nut, new Database(washer, null)));
+
+    println(@cost(2, 11));
+    println(@cost(3, 50));
+    println(@cost(1, 11));
+    println(@cost(5, 1000));
+end
+
+// **
+// calculate the total cost of a given quantity of parts
+// using the part number to look it up in the database
+// (return 0 if the specified part number does not exist)
+// **
+fun int @cost(int partNumber, int quantity) {
+    rec(Part) part = @lookup(partNumber);
+    return (part == null) ? 0 : part.unitCost * quantity;
+}
+
+// **
+// find a part record in the database
+// (return null if the given part number does not exist)
+// **
+fun rec(Part) @lookup(int partNumber) {
+    rec(Database) temp = db;
+    rec(Part) result = null;
+    while (!(temp == null) && (result == null)) {
+        if (temp.part.number == partNumber)
+            result = temp.part;
+        else
+            temp = temp.rest;
+    }
+    return result;
+}

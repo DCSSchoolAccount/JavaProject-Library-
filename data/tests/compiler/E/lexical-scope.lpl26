@@ -1,0 +1,32 @@
+//3
+//4
+//3
+//2
+//1
+//
+
+begin
+    int x = @bar();
+    @foo(x);
+    println(x);
+end
+
+fun int @bar() { return x + 1; }
+
+proc @foo(int y) {
+    int x = y;
+    {
+        {
+            int x = 3;
+            {
+                println(x);
+                int x = 5;
+                x = x - 1;
+                println(x);
+            }
+            println(x);
+        }
+        x = x + 1;
+    }
+    println(x);
+}

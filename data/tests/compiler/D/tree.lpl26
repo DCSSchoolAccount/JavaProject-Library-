@@ -1,0 +1,28 @@
+//2
+//5
+//3
+//5
+//1
+//
+
+recdef Tree(int v, rec(Tree)[] children);
+
+begin
+    rec(Tree) tree = new Tree(1, new (rec(Tree))[3]);
+
+    tree.children[0] = new Tree(2, new (rec(Tree))[0]);
+    tree.children[1] = new Tree(3, new (rec(Tree))[1]);
+    tree.children[2] = new Tree(4, new (rec(Tree))[0]);
+    tree.children[1].children[0] = tree.children[2];
+    tree.children[1].children[0].v = 5;
+    @postOrder(tree);
+end
+
+proc @postOrder(rec(Tree) type) {
+    int i = 0;
+    while (i < length(type.children)) {
+        @postOrder(type.children[i]);
+        i = i + 1;
+    }
+    println(type.v);
+}

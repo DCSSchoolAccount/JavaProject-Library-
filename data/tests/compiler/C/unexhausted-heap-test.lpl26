@@ -1,0 +1,22 @@
+//9
+//8
+//7
+//6
+//5
+//4
+//3
+//2
+//1
+//
+
+begin
+    int[] a = new (int)[10000];
+    int n = 9;
+
+	while (n > 0) {
+	    free(a);
+        println(n);
+		a = new (int)[10000];
+		n = n - 1;
+	}
+end
